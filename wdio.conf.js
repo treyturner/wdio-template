@@ -82,7 +82,7 @@ exports.config = {
     //   // excludeDriverLogs: ['bugreport', 'server'],
     // },
     {
-      browserName: 'firefox',
+      browserName: 'chrome',
       maxInstances: 1
     }
   ],
