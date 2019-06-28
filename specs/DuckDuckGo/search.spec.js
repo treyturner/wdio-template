@@ -45,7 +45,7 @@ describe('Duck Duck Go', () => {
       for (let i = 0; i < 1; i++) {
         console.log(`title[${i}]: ${ddg.results(i).title.getText()}`)
         console.log(`snippit[${i}]: ${ddg.results(i).snippit.getText()}`)
-        console.log(`url[${i}]: ${ddg.results(i).url.getText()}\n`)
+        console.log(`url[${i}]: ${ddg.results(i).url.getText()}`)
       }
     })
   })

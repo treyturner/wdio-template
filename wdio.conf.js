@@ -198,7 +198,6 @@ exports.config = {
     // determining the path of test files to upload
     localBrowser = config.hostname === '127.0.0.1'
 
-    // Log folders are created automatically
     // We need to create screenshots directory if it doesn't exist
     if (!fs.existsSync(this.screenshotPath)) { mkdirp.sync(this.screenshotPath) }
   },
@@ -210,12 +209,11 @@ exports.config = {
    * @param {Array.<Object>} capabilities list of capabilities details
    * @param {Array.<String>} specs List of spec file paths that are to be run
    */
-  beforeSession: function (config, capabilities, specs) {
-    // console.log(`beforeSession.config:`, config)
-    // console.log(`beforeSession.capabilities:`, capabilities)
-    // console.log(`beforeSession.specs:`, specs)
-    suiteStats = { pass: 0, skip: 0, fail: 0, startTime: Date.now() }
-  },
+  // beforeSession: function (config, capabilities, specs) {
+  //   console.log(`beforeSession.config:`, config)
+  //   console.log(`beforeSession.capabilities:`, capabilities)
+  //   console.log(`beforeSession.specs:`, specs)    
+  // },
   //
   /**
    * Gets executed before test execution begins. At this point you can access to all global
@@ -308,15 +306,14 @@ exports.config = {
      */
     shared.setup('DuckDuckGo', function () {
       browser.url('https://duckduckgo.com')
-      // ddg.search.input.waitForDisplayed(5000)
     })
 
     shared.setup('treyturner.info', function () {
       browser.url('https://treyturner.info')
     })
 
-    // Maximize/full-screen browser
-    // browser.maximizeWindow()
+    // Maximize browser
+    browser.maximizeWindow()
   },
   /**
    * Runs before a WebdriverIO command gets executed.
@@ -329,9 +326,9 @@ exports.config = {
    * Hook that gets executed before the suite starts
    * @param {Object} suite suite details
    */
-  beforeSuite: function (suite) {
-    // console.log(`beforeSuite.suite:`, suite)
-  },
+  // beforeSuite: function (suite) {
+  //   console.log(`beforeSuite.suite:`, suite)
+  // },
   /**
    * Function to be executed before a test (in Mocha/Jasmine) or a step (in Cucumber) starts.
    * @param {Object} test test details
@@ -358,39 +355,20 @@ exports.config = {
     // console.log(`afterTest.test:`, test)
 
     if (!test.passed) {
-      suiteStats.fail++
       let timestamp = moment().format('YYYYMMDD-HHmmss')
       let filename = `${timestamp}-${browser.capabilities.browserName}-${test.fullTitle}`.replace(/\s+/g, '_')
       let encoded = encodeURIComponent(filename)
       let filePath = path.join(this.screenshotPath, `${encoded}.png`)
       browser.saveScreenshot(filePath)
-    } else {
-      suiteStats.pass++
     }
   },
   /**
    * Hook that gets executed after the suite has ended
    * @param {Object} suite suite details
    */
-  afterSuite: function (suite) {
-    // console.log(`afterSuite.suite:`, suite)
-    /**
-     * Convert a quantity of milliseconds to a 'minutes and seconds' string representation.
-     * @param {Number} s Time in milliseconds, such as the result of subtracting two Dates
-     */
-    function msToTime (s) {
-      s = (s - s % 1000) / 1000
-      var secs = s % 60
-      var mins = (s - secs) / 60
-      return `${mins}m ${secs}s`
-    }
-
-    if (typeof suiteStats !== 'undefined') {
-      suiteStats.endTime = Date.now()
-      suiteStats.duration = msToTime(suiteStats.endTime - suiteStats.startTime)
-      console.log(`afterSuite.suiteStats:`, suiteStats)
-    }
-  },
+  // afterSuite: function (suite) {
+  //   // console.log(`afterSuite.suite:`, suite)
+  // },
   /**
    * Runs after a WebdriverIO command gets executed
    * @param {String} commandName hook command name
@@ -407,22 +385,22 @@ exports.config = {
    * @param {Array.<Object>} capabilities list of capabilities details
    * @param {Array.<String>} specs List of spec file paths that ran
    */
-  after: function (result, capabilities, specs) {
-    // console.log(`after.result:`, result)
-    // console.log(`after.capabilities:`, capabilities)
-    // console.log(`after.specs:`, specs)
-  },
+  // after: function (result, capabilities, specs) {
+  //   console.log(`after.result:`, result)
+  //   console.log(`after.capabilities:`, capabilities)
+  //   console.log(`after.specs:`, specs)
+  // },
   /**
    * Gets executed right after terminating the webdriver session.
    * @param {Object} config wdio configuration object
    * @param {Array.<Object>} capabilities list of capabilities details
    * @param {Array.<String>} specs List of spec file paths that ran
    */
-  afterSession: function (config, capabilities, specs) {
-    // console.log(`afterSession.config:`, config)
-    // console.log(`afterSession.capabilities:`, capabilities)
-    // console.log(`afterSession.specs:`, specs)
-  },
+  // afterSession: function (config, capabilities, specs) {
+  //   console.log(`afterSession.config:`, config)
+  //   console.log(`afterSession.capabilities:`, capabilities)
+  //   console.log(`afterSession.specs:`, specs)
+  // },
   /**
    * Gets executed after all workers got shut down and the process is about to exit. An error
    * thrown in the onComplete hook will result in the test run failing.
@@ -431,12 +409,12 @@ exports.config = {
    * @param {Array.<Object>} capabilities list of capabilities details
    * @param {<Object>} results object containing test results
    */
-  onComplete: function (exitCode, config, capabilities, results) {
-    // console.log(`onComplete.exitCode:`, exitCode)
-    // console.log(`onComplete.config:`, config)
-    // console.log(`onComplete.capabilities:`, capabilities)
-    // console.log(`onComplete.results:`, results)
-  }
+  // onComplete: function (exitCode, config, capabilities, results) {
+  //   console.log(`onComplete.exitCode:`, exitCode)
+  //   console.log(`onComplete.config:`, config)
+  //   console.log(`onComplete.capabilities:`, capabilities)
+  //   console.log(`onComplete.results:`, results)
+  // }
   /**
   * Gets executed when a refresh happens.
   * @param {String} oldSessionId session ID of the old session
