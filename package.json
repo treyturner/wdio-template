@@ -1,0 +1,50 @@
+{
+  "name": "wdio-template",
+  "version": "1.0.0",
+  "description": "My WebdriverIO v5 template. JUnit, Allure, Jenkins, and other boilerplate.",
+  "main": "index.js",
+  "scripts": {
+    "allure": "npm run allure:generate && npm run allure:serve",
+    "allure:generate": "node_modules/.bin/allure generate -c -o reports/allure-reports reports/allure-results",
+    "allure:serve": "node_modules/.bin/allure open reports/allure-reports",
+    "clean": "node lib/clean.js",
+    "jenkins:all": "node_modules/.bin/wdio wdio.conf.jenkins.all.js",
+    "jenkins:chrome": "node_modules/.bin/wdio wdio.conf.jenkins.chrome.js",
+    "jenkins:firefox": "node_modules/.bin/wdio wdio.conf.jenkins.firefox.js",
+    "test": "node_modules/.bin/wdio"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/treyturner/wdio-template.git"
+  },
+  "author": "Trey Turner",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/treyturner/wdio-template/issues"
+  },
+  "homepage": "https://github.com/treyturner/wdio-template#readme",
+  "devDependencies": {
+    "@wdio/allure-reporter": "^5.10.5",
+    "@wdio/cli": "^5.10.9",
+    "@wdio/junit-reporter": "^5.9.3",
+    "@wdio/local-runner": "^5.10.9",
+    "@wdio/mocha-framework": "^5.10.8",
+    "@wdio/selenium-standalone-service": "^5.9.3",
+    "@wdio/spec-reporter": "^5.9.3",
+    "@wdio/sync": "^5.10.8",
+    "allure-commandline": "^2.9.0",
+    "chai": "^4.2.0",
+    "eslint": "^6.0.1",
+    "eslint-config-standard": "^12.0.0",
+    "eslint-plugin-import": "^2.18.0",
+    "eslint-plugin-node": "^9.1.0",
+    "eslint-plugin-promise": "^4.2.1",
+    "eslint-plugin-standard": "^4.0.0",
+    "lodash": "^4.17.11",
+    "mkdirp": "^0.5.1",
+    "mocha-param": "^2.0.0",
+    "mocha-shared": "^0.2.0",
+    "moment": "^2.24.0",
+    "rimraf": "^2.6.3"
+  }
+}
